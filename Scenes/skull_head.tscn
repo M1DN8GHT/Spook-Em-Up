@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgsyrdajbcsf0"]
+
+[ext_resource type="Texture2D" uid="uid://dspifqmjnlrjj" path="res://Assets/enemy ships/Skull head.png" id="1_g7pev"]
+[ext_resource type="Script" path="res://Scenes/skull_head.gd" id="1_ql0nf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvdl0"]
+atlas = ExtResource("1_g7pev")
+region = Rect2(0, 0, 56, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqm6x"]
+atlas = ExtResource("1_g7pev")
+region = Rect2(56, 0, 56, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8dlr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvdl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqm6x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjs1w"]
+radius = 23.0217
+
+[node name="SkullHead" type="Area2D" groups=["Enemy"]]
+script = ExtResource("1_ql0nf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e8dlr")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sjs1w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
